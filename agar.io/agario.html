@@ -44,13 +44,16 @@
 		void draw(){
 			background(0,0,0);
 			// draw a star 
-			for (var i = 0;i<50;i++){
+			for (var i = 0;i<5;i++){
 				 newStar = listOfStar[i];
 				 newStar.drawStar(); 
-				 println(xpos); 
-			  	if ((xpos<= newStar.xPos+3 && xpos>=newStar.xPos-3) || (ypos<= newStar.yPos+3 && ypos>=newStar.yPos-3)) {
-				 print("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
-			}
+				 
+			  	if (xpos<= newStar.xPos+20 && xpos>=newStar.xPos-20){
+			  			println("hello");
+				  	if(ypos<= newStar.yPos+20 && ypos>=newStar.yPos-20) {
+					 	println("the circle is at x position:" + xpos + " and the y position of the circle is at : "+ ypos +" the star is at xpos " + newStar.xPos + " the star is at ypos " + newStar.yPos);
+						}
+					}
 			  	}
 			
 			// draws planets
@@ -62,12 +65,14 @@
 		 	float dx = mouseX - xpos;
 		  	if(abs(dx) > 1) {
 		   		xpos += dx * easing;
+
 		   		
 		 	}
 		  	targetY = mouseY;
 		  	float dy = mouseY - ypos;
 		  	if(abs(dy) > 1) {
 		    	ypos += dy * easing;
+		    	
 		  	}
 		  	
 
@@ -105,7 +110,7 @@
 			var d; 
 			//constructor
 		Planet(){
-			d= 50;
+			d= 10;
 			r = random(20,255);
 			g = random(20,255);
 			b = random(20,255);
