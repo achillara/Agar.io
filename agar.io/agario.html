@@ -5,7 +5,7 @@
 
 
 		var star; 
-		var listOfStars =[];
+		var listOfStar =[];
 		/* NUMBER OF STARS */
 		var numStars = 200;
 		var x3;
@@ -23,12 +23,6 @@
 			size(1900,920);
 			background(0,0,0);
 			//this loop iterates through all the stars and puts them in random places
-			for (var i = 0; i < 50; i++){
-					x3 = random(5,955);
-					y3= random(5,955);
-					star = new Star(); 
-					listOfStars.push(star);
-				}
 			// iterates through the planets 
 			for (i = 0; i < numPlanet; i++){
 			  		var newPlanet = new Planet();
@@ -40,10 +34,10 @@
 			/* THIS IS THE NEW STAR CODE */
 
 			for(i = 0; i < numStars; i++) {
-					var newStarsXPos = random(10, 700);
-					var newStarsYPos = random(10, 500);
-					var newStars = new Stars(newStarsXPos, newStarsYPos); //make a new Stars
-					listOfStars.push(newStars); //store Stars in list
+					var newStarXPos = random(0, 1000);
+					var newStarYPos = random(0, 920);
+					var newStar = new Star(newStarXPos, newStarYPos); //make a new Stars
+					listOfStar.push(newStar); //store Stars in list
 				}
 			/* END OF NEW STAR CODE */
 		}
@@ -52,7 +46,7 @@
 			background(0,0,0);
 			// draw a star 
 			for (var i = 0;i<50;i++){
-				 var newStar = listOfStars[i];
+				 var newStar = listOfStar[i];
 				 newStar.drawStar(); 
 			}
 			// draws planets
@@ -72,30 +66,29 @@
 		  	}
 		}
 
-			class Stars {
-				//attributes
- 				var xPos;
- 				var yPos;
-	 			var r;
-	 			var g;
-	 			var b;
+		class Star {
+			//attribut+es
+ 			var xPos;
+ 			var yPos;
+	 		var r;
+	 		var g;
+	 		var b;
 
-	 			Stars (xPosition, yPosition) {
-	 				xPos = random(0, 1900);
-	 				yPos = random(0, 900);
-	 				r = 250;
-	 				g = 251;
-	 				b = 142;
+	 	Star (xPosition, yPosition) {
+	 		xPos = xPosition;
+	 		yPos = yPosition;
+	 		r = 250;
+	 		g = 251;
+	 		b = 142;
  				}
 
- 				void drawStars() {
- 					noStroke();
-				    fill(r, g, b);
-				   	ellipse(xPos, yPos, 80, 50);
-					}
+ 		void drawStar() {
+ 			noStroke();
+			fill(r, g, b);
+			ellipse(xPos, yPos, 10, 10);
  				}
 
-			}
+		}
 
 		class Planet{
 			var size;
