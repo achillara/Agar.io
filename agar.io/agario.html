@@ -1,0 +1,104 @@
+<html>
+	<head>
+		<script src="processing-1.4.1.js"></script>
+		<script type="text/processing" data-processing-target="mycanvas">
+
+
+		var star; 
+		var listOfStars =[];
+		var x3;
+		var y3;
+		var planet;
+		var listOfPlanet = [];
+		var numPlanet = 10;
+		var xpos = random(1000,2000);
+		var ypos = random(200,900);
+		float targetX, targetY;
+		float easing = 0.05;
+
+		void setup(){
+			// this sets up the black background
+			size(1900,920);
+			background(0,0,0);
+			//this loop iterates through all the stars and puts them in random places
+			for (var i = 0; i < 50; i++){
+					x3 = random(5,955);
+					y3= random(5,955);
+					star = new Star(); 
+					listOfStars.push(star);
+				}
+			// iterates through the planets 
+			for (i = 0; i < numPlanet; i++){
+			  		var newPlanet = new Planet();
+			  		listOfPlanet.push(newPlanet);
+			  	}
+			smooth();
+			noStroke();
+		}
+
+		void draw(){
+			background(0,0,0);
+			// draw a star 
+			for (var i = 0;i<50;i++){
+				 var newStar = listOfStars[i];
+				 newStar.drawStar(); 
+			}
+			// draws planets
+			for(i = 0; i < numPlanet; i++){
+				var planet = listOfPlanet[i];
+				planet.drawPlanet();
+			}
+		  	targetX = mouseX;
+		 	float dx = mouseX - xpos;
+		  	if(abs(dx) > 1) {
+		   		xpos += dx * easing;
+		 	}
+		  	targetY = mouseY;
+		  	float dy = mouseY - ypos;
+		  	if(abs(dy) > 1) {
+		    	ypos += dy * easing;
+		  	}
+		}
+
+		class Star{
+			var x; 
+			var y; 
+
+			Star(){
+			
+			}
+
+			void drawStar(){
+			 	rect(x3,y3,7,7);
+			 	fill(255,255,0);
+			 }
+		
+		class Planet{
+			var size;
+			var r;
+			var g;
+			var b;
+			var d; 
+			//constructor
+		Planet(){
+			d= 50;
+			r = random(20,255);
+			g = random(20,255);
+			b = random(20,255);
+		}
+
+		void drawPlanet(){
+			noStroke();
+			fill(r,g,b);
+			ellipse(xpos, ypos,d,d);
+
+		}
+
+	}
+	
+		</script> 
+	</head>
+	<body>
+		<canvas id="mycanvas"></canvas>
+	</body>
+</html>
