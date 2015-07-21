@@ -3,13 +3,9 @@
 		<script src="processing-1.4.1.js"></script>
 		<script type="text/processing" data-processing-target="mycanvas">
 
-
 		var star; 
 		var listOfStar =[];
-		/* NUMBER OF STARS */
 		var numStars = 200;
-		var x3;
-		var y3;
 		var planet;
 		var listOfPlanet = [];
 		var numPlanet = 10;
@@ -34,7 +30,7 @@
 			/* THIS IS THE NEW STAR CODE */
 
 			for(i = 0; i < numStars; i++) {
-					var newStarXPos = random(0, 1000);
+					var newStarXPos = random(0, 1900);
 					var newStarYPos = random(0, 920);
 					var newStar = new Star(newStarXPos, newStarYPos); //make a new Stars
 					listOfStar.push(newStar); //store Stars in list
