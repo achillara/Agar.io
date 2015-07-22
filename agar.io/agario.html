@@ -6,6 +6,8 @@
 
 		var star; 
 		var listOfStars =[];
+		/* NUMBER OF STARS */
+		var numStars = 200;
 		var x3;
 		var y3;
 		var planet;
@@ -34,6 +36,16 @@
 			  	}
 			smooth();
 			noStroke();
+
+			/* THIS IS THE NEW STAR CODE */
+
+			for(i = 0; i < numStars; i++) {
+					var newStarsXPos = random(10, 700);
+					var newStarsYPos = random(10, 500);
+					var newStars = new Stars(newStarsXPos, newStarsYPos); //make a new Stars
+					listOfStars.push(newStars); //store Stars in list
+				}
+			/* END OF NEW STAR CODE */
 		}
 
 		void draw(){
@@ -60,19 +72,31 @@
 		  	}
 		}
 
-		class Star{
-			var x; 
-			var y; 
+			class Stars {
+				//attributes
+ 				var xPos;
+ 				var yPos;
+	 			var r;
+	 			var g;
+	 			var b;
 
-			Star(){
-			
+	 			Stars (xPosition, yPosition) {
+	 				xPos = random(0, 1900);
+	 				yPos = random(0, 900);
+	 				r = 250;
+	 				g = 251;
+	 				b = 142;
+ 				}
+
+ 				void drawStars() {
+ 					noStroke();
+				    fill(r, g, b);
+				   	ellipse(xPos, yPos, 80, 50);
+					}
+ 				}
+
 			}
 
-			void drawStar(){
-			 	rect(x3,y3,7,7);
-			 	fill(255,255,0);
-			 }
-		
 		class Planet{
 			var size;
 			var r;
