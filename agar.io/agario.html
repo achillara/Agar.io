@@ -16,6 +16,8 @@
 		float easing = 0.05;
 		var newStarXPos;
 		var newStarYPos;
+		var random1; 
+		var random2; 
 		var newPlanet;
 		//star = loadImage("goldenstar.png");
 
@@ -48,10 +50,13 @@
 
 		void draw(){
 			background(0,0,0);
+			newStarXPos = random(0, 1900);
+			newStarYPos = random(0, 920);
 			// draw a star 
 			for (var i = 0;i<numStars;i++){
 				 newStar = listOfStar[i];
 				 newStar.drawStar(); 
+				 
 				 
 			  	if (xpos<= newStar.xPos+20 && xpos>=newStar.xPos-20){
 			  			println("hello");
@@ -137,9 +142,10 @@
 			println(d); 
 		}
 
+		}
 		
 
-	}
+	
 	
 		</script> 
 	</head>
