@@ -19,7 +19,7 @@
 		var newPlanet;
 		var newEnemy;
 
-		listOfEnemy =[]; 
+		 var listOfEnemy =[]; 
 		//star = loadImage("goldenstar.png");
 
 		void setup(){
@@ -38,7 +38,7 @@
 
 			//this is the enemy class
 			for( i =0 ;i< 2;i++){
-			 	newEnemy= new Enemy(100,100,2,2,200,255,30);
+			 	newEnemy= new Enemy(100,100,2,2,200,255);
 			 	listOfEnemy.push(newEnemy);
 			}
 
@@ -161,9 +161,8 @@
 			if( xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
 				println(xpos);
 			if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
-				println("hellllllllllllllllllllllllllllllllllloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
-				d = d+(enemy.d/32);
-				enemy.disappear();
+				d = d+(enemy.d/28);
+				enemy.disappear();				
 			}
 
 		}
@@ -182,14 +181,14 @@
 			var b;
 			var d; 
 
-			Enemy(xPos1,yPos1,speedX1,r1,g1,b1,d1) {
+			Enemy(xPos1,yPos1,speedX1,r1,g1,b1) {
 					xPos = xPos1; 
 					yPos = yPos1;
 					r = r1;
 					g = g1;
 					b = b1; 
 					speedX = speedX1; 
-					d = d1;
+					d = 30;
 			}
 			void drawEnemy(){
 				noStroke();
@@ -205,10 +204,8 @@
 			}
 
 			void disappear(){ 
-				xPos = newStarXPos; 
-	 			yPos = newStarYPos;
-	 			speedX=0;
-	 			drawEnemy();
+				d = 0;
+				drawEnemy();
 			}
 			
 		}
