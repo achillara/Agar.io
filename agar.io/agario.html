@@ -21,14 +21,9 @@
 		var newEnemy;
 		var numHole = 10;
 		var listOfHole = [];
-
-<<<<<<< HEAD
-		 var listOfEnemy =[]; 
+		var listOfEnemy =[]; 
+		var listOfEnemy = [];
 		//star = loadImage("goldenstar.png");
-=======
-		listOfEnemy =[]; 
-		
->>>>>>> origin/master
 
 		void setup(){
 			star = loadImage("goldenstar.png");
@@ -78,7 +73,7 @@
 			// draw a star 
 			for (var i = 0;i<numStars;i++){
 				 newStar = listOfStar[i];
-				 newStar.drawStar();  
+				 newStar.drawStar(); 
 				 
 				 
 			  	if (xpos<= newStar.xPos+20 && xpos>=newStar.xPos-20){
@@ -88,9 +83,6 @@
 
 					 	newStar.teleport();
 					 	newPlanet.increaseStar();
-
-
-
 						}
 					}
 			  	}
@@ -132,7 +124,6 @@
 		}
 
 		class Star {
-			//attribut+es
  			var xPos;
  			var yPos;
 
@@ -184,8 +175,7 @@
 			if( xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
 				println(xpos);
 			if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
-				d = d+(enemy.d/28);
-				enemy.disappear();				
+				d = d+(enemy.d/28);				
 			}
 
 		}
