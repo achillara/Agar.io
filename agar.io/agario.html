@@ -16,6 +16,7 @@
 		float easing = 0.05;
 		var newStarXPos;
 		var newStarYPos;
+		var newPlanet;
 		//star = loadImage("goldenstar.png");
 
 		void setup(){
@@ -26,7 +27,7 @@
 			//this loop iterates through all the stars and puts them in random places
 			// iterates through the planets 
 			for (i = 0; i < numPlanet; i++){
-			  		var newPlanet = new Planet();
+			  		 newPlanet = new Planet();
 			  		listOfPlanet.push(newPlanet);
 			  			  	
 			  	}
@@ -58,6 +59,8 @@
 					 	println("the circle is at x position:" + xpos + " and the y position of the circle is at : "+ ypos +" the star is at xpos " + newStar.xPos + " the star is at ypos " + newStar.yPos);
 
 					 	newStar.teleport();
+					 	newPlanet.increaseStar();
+
 
 
 						}
@@ -103,6 +106,7 @@
 	 		void teleport(){
 	 			 xPos = newStarXPos; 
 	 			 yPos = newStarYPos;
+	 			 drawStar();
 	 		}
 
 		}
@@ -126,6 +130,11 @@
 			fill(r,g,b);
 			ellipse(xpos, ypos,d,d);
 
+		}
+
+		void increaseStar(){
+			d=d+1;
+			println(d); 
 		}
 
 		
