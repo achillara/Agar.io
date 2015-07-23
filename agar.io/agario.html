@@ -85,30 +85,10 @@
 			newStarXPos = random(0, 1900);
 			newStarYPos = random(0, 920);
 
-			// draw a star 
-			for (var i = 0;i<numStars;i++){
-				 newStar = listOfStar[i];
-				 newStar.drawStar(); 
-				 
-			  	if (xpos<= newStar.xPos+20 && xpos>=newStar.xPos-20){
-			  			
-				  	if(ypos<= newStar.yPos+20 && ypos>=newStar.yPos-20) {
-					 	println("the circle is at x position:" + xpos + " and the y position of the circle is at : "+ ypos +" the star is at xpos " + newStar.xPos + " the star is at ypos " + newStar.yPos);
-
-					 	newStar.teleport();
-					 	newPlanet.increaseStar();
-						}
-					}
-			  	}
+			
 
 			//draws enemy
-			if (numEnemy>0){
-			for(i = 0; i < numEnemy; i++){
-				newEnemy = listOfEnemy[i];
-				newEnemy.drawEnemy();
-				newEnemy.moveEnemy();
-			}
-		}
+
 			for(i = 0; i < 2; i++) {
 				newHole= listOfHole[i];
 				newHole.drawHole();
@@ -116,10 +96,26 @@
 			
 			// draws planets
 			for(i = 0; i < numPlanet; i++){
-				var planet = listOfPlanet[i];
+				planet = listOfPlanet[i];
 				planet.drawPlanet();
-				planet.increaseEnemy(newEnemy)
+				
+				planet.eatStars(newStar);
 			}
+
+			if (numEnemy>0){
+			for(i = 0; i < numEnemy; i++){
+				newEnemy = listOfEnemy[i];
+				newEnemy.drawEnemy();
+				newEnemy.moveEnemy();
+				planet.increaseEnemy(newEnemy);
+			}
+		}
+			// draw a star 
+			for (var i = 0;i<numStars;i++){
+				 newStar = listOfStar[i];
+				 newStar.drawStar();
+				 planet.eatStars(newStar); 
+			  	}
 		  	targetX = mouseX;
 		 	float dx = mouseX - xpos;
 		  	if(abs(dx) > 1) {
@@ -152,6 +148,8 @@
 	 			 yPos = newStarYPos;
 	 			 drawStar();
 	 		}
+	 		
+
 		}
 
 		class Planet{
@@ -178,14 +176,27 @@
 				d=d+1;
 				println(d); 
 			}
+			void eatStars(newStar){ 
+				if (xpos<= newStar.xPos+20 && xpos>=newStar.xPos-20){
+			  			
+				  	if(ypos<= newStar.yPos+20 && ypos>=newStar.yPos-20) {
+					 	println("the circle is at x position:" + xpos + " and the y position of the circle is at : "+ ypos +" the star is at xpos " + newStar.xPos + " the star is at ypos " + newStar.yPos);
 
+					 	newStar.teleport();
+					 	increaseStar();
+						}
+				}
+				
+		}
+
+			
 			void increaseEnemy(enemy){ 
 				if( xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
-					println(xpos);
+					println("this xpos is " + xpos);
 				if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
 					println("the enemy.d is " + enemy.d + " and the d of planet is " + d);
 						if((enemy.d +5)>=d){
-							println(" YOU LOSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+							println(" YOU LOSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 							exit();
 						}
 						else if(enemy.d<=(d+5)){
