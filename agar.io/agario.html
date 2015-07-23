@@ -7,22 +7,25 @@
 		PImage blackhole;
 		var listOfStar =[];
 		var numStars = 200;
+		var newStar;
+		var newStarXPos;
+		var newStarYPos;
+
 		var planet;
 		var listOfPlanet = [];
 		var numPlanet = 10;
+		var newPlanet;
 		var xpos;
 		var ypos;
-		var newStar;
-		float targetX, targetY;
-		float easing = 0.05;
-		var newStarXPos;
-		var newStarYPos;
-		var newPlanet;
+		
 		var newEnemy;
+		var listOfEnemy =[]; 
+		
 		var numHole = 10;
 		var listOfHole = [];
-		var listOfEnemy =[]; 
-		var listOfEnemy = [];
+		
+		float targetX, targetY;
+		float easing = 0.05;
 		//star = loadImage("goldenstar.png");
 
 		void setup(){
@@ -144,33 +147,33 @@
 			var b;
 			var d; 
 			//constructor
-		Planet(){
-			d= 50;
-			r = random(20,255);
-			g = random(20,255);
-			b = random(20,255);
-		}
-
-		void drawPlanet(){
-			noStroke();
-			fill(r,g,b);
-			ellipse(xpos, ypos,d,d);
-		}
-
-		void increaseStar(){
-			d=d+1;
-			println(d); 
-		}
-
-		void increaseEnemy(enemy){ 
-			if( xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
-				println(xpos);
-			if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
-				d = d+(enemy.d/28);				
+			Planet(){
+				d= 50;
+				r = random(20,255);
+				g = random(20,255);
+				b = random(20,255);
 			}
+
+			void drawPlanet(){
+				noStroke();
+				fill(r,g,b);
+				ellipse(xpos, ypos,d,d);
+			}
+
+			void increaseStar(){
+				d=d+1;
+				println(d); 
+			}
+
+			void increaseEnemy(enemy){ 
+				if( xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
+					println(xpos);
+				if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
+					d = d+(enemy.d/28);				
+				}
+				}
 			}
 		}
-	}
 		
 		class Enemy{
 			var xPos; 
@@ -211,9 +214,9 @@
 			}
 		}
 
-			class Blackhole{ 
-				var xPos;
-				var yPos;
+		class Blackhole{ 
+			var xPos;
+			var yPos;
 	
 			Blackhole(xPosition, yPosition){
 				xPos = xPosition;
