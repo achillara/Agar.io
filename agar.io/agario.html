@@ -3,30 +3,31 @@
 		<script src="processing-1.4.1.js"></script>
 		<script type="text/processing" data-processing-target="mycanvas">
 
-		PImage star;
-		PImage blackhole;
-		var listOfStar =[];
-		var numStars = 200;
-		var newStar;
-		var newStarXPos;
-		var newStarYPos;
+		//All of the Variables at present.
+			PImage star;
+			PImage blackhole;
+			var listOfStar =[];
+			var numStars = 200;
+			var newStar;
+			var newStarXPos;
+			var newStarYPos;
 
-		var planet;
-		var listOfPlanet = [];
-		var numPlanet = 10;
-		var newPlanet;
-		var xpos;
-		var ypos;
-		
-		var newEnemy;
-		var listOfEnemy =[]; 
+			var planet;
+			var listOfPlanet = [];
+			var numPlanet = 10;
+			var newPlanet;
+			var xpos;
+			var ypos;
+			
+			var newEnemy;
+			var listOfEnemy =[]; 
 
-		var numHole = 10;
-		var listOfHole = [];
-		
-		float targetX, targetY;
-		float easing = 0.05;
-		//star = loadImage("goldenstar.png");
+			var numHole = 10;
+			var listOfHole = [];
+			
+			float targetX, targetY;
+			float easing = 0.05;
+			//star = loadImage("goldenstar.png");
 
 		void setup(){
 			star = loadImage("goldenstar.png");
