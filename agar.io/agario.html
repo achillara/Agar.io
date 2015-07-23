@@ -75,7 +75,6 @@
 				 newStar = listOfStar[i];
 				 newStar.drawStar(); 
 				 
-				 
 			  	if (xpos<= newStar.xPos+20 && xpos>=newStar.xPos-20){
 			  			
 				  	if(ypos<= newStar.yPos+20 && ypos>=newStar.yPos-20) {
@@ -96,8 +95,6 @@
 			for(i = 0; i < 2; i++) {
 					newHole= listOfHole[i];
 					newHole.drawHole();
-
-
 				}
 			
 			// draws planets
@@ -116,11 +113,8 @@
 		  	targetY = mouseY;
 		  	float dy = mouseY - ypos;
 		  	if(abs(dy) > 1) {
-		    	ypos += dy * easing;
-		    	
+		    	ypos += dy * easing;	
 		  	}
-		  	
-
 		}
 
 		class Star {
@@ -141,7 +135,6 @@
 	 			 yPos = newStarYPos;
 	 			 drawStar();
 	 		}
-
 		}
 
 		class Planet{
@@ -162,13 +155,11 @@
 			noStroke();
 			fill(r,g,b);
 			ellipse(xpos, ypos,d,d);
-
 		}
 
 		void increaseStar(){
 			d=d+1;
 			println(d); 
-
 		}
 
 		void increaseEnemy(enemy){ 
@@ -177,13 +168,10 @@
 			if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
 				d = d+(enemy.d/28);				
 			}
-
-		}
-
+			}
 		}
 	}
 		
-
 		class Enemy{
 			var xPos; 
 			var yPos; 
@@ -203,6 +191,7 @@
 					speedX = speedX1; 
 					d = 30;
 			}
+			
 			void drawEnemy(){
 				noStroke();
 				fill(r,g,b);
@@ -220,7 +209,6 @@
 				d = 0;
 				drawEnemy();
 			}
-			
 		}
 
 			class Blackhole{ 
@@ -234,14 +222,9 @@
 
 			void drawHole(){ 
 				image(blackhole, xPos, yPos, 50, 50);
-
 			}
-
-
-
 		}
-	
-	
+		//Hello. This is a side note, coming for your soul.	
 		</script> 
 	</head>
 	<body>
