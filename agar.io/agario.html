@@ -4,6 +4,7 @@
 		<script type="text/processing" data-processing-target="mycanvas">
 
 		PImage star;
+		PImage blackhole;
 		var listOfStar =[];
 		var numStars = 200;
 		var planet;
@@ -18,12 +19,15 @@
 		var newStarYPos;
 		var newPlanet;
 		var newEnemy;
+		var numHole = 10;
+		var listOfHole = [];
 
 		listOfEnemy =[]; 
-		//star = loadImage("goldenstar.png");
+		
 
 		void setup(){
 			star = loadImage("goldenstar.png");
+			blackhole = loadImage("blackhole.gif");
 			// this sets up the black background
 			size(1900,920);
 			background(0,0,0);
@@ -52,6 +56,14 @@
 					
 				}
 			/* END OF NEW STAR CODE */
+			
+			for(i = 0; i < numHole; i++) {
+					 newHoleXPos = random(0, 1900);
+					 newHoleYPos = random(0, 920);
+					newHole = new Blackhole(newHoleXPos, newHoleYPos); //make a new Stars
+					listOfHole.push(newHole); //store BlackHoles in list
+					
+				}
 		}
 
 		void draw(){
@@ -84,6 +96,12 @@
 				newEnemy.drawEnemy();
 				newEnemy.moveEnemy();
 			}
+			for(i = 0; i < 2; i++) {
+					newHole= listOfHole[i];
+					newHole.drawHole();
+
+
+				}
 			
 			// draws planets
 			for(i = 0; i < numPlanet; i++){
@@ -213,6 +231,23 @@
 			
 		}
 
+			class Blackhole{ 
+				var xPos;
+				var yPos;
+	
+			Blackhole(xPosition, yPosition){
+				xPos = xPosition;
+				yPos = yPosition;
+			}
+
+			void drawHole(){ 
+				image(blackhole, xPos, yPos, 50, 50);
+
+			}
+
+
+
+		}
 	
 	
 		</script> 
