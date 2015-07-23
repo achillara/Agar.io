@@ -14,13 +14,13 @@
 
 			var planet;
 			var listOfPlanet = [];
-			var numPlanet = 10;
+			var numPlanet = 1;
 			var newPlanet;
 			var xpos;
 			var ypos;
 			
 			var newEnemy;
-			var numEnemy =1;
+			var numEnemy =5;
 			var listOfEnemy =[]; 
 
 			var numHole = 10;
@@ -55,7 +55,9 @@
 				 r = random(100,255)
 				 g = random(100,255)
 				 b = random(100,255)
-			 	newEnemy= new Enemy(100,100, newSpeed, newSpeed, r, g, b);
+				 var randX = random(0, 1920)
+				 var randY = random( 0,920);
+			 	newEnemy= new Enemy(randX,randY, newSpeed, newSpeed, r, g, b);
 			 	listOfEnemy.push(newEnemy);
 			}
 
@@ -181,9 +183,16 @@
 				if( xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
 					println(xpos);
 				if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
-					d = d+(enemy.d/28);	
-					enemy.teleport();
-					}
+					println("the enemy.d is " + enemy.d + " and the d of planet is " + d);
+						if((enemy.d +5)>=d){
+							println(" YOU LOSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+							exit();
+						}
+						else if(enemy.d<=(d+5)){
+							d = d+(enemy.d/28);	
+							
+							enemy.teleport();
+							}
 				}
 
 
@@ -191,6 +200,7 @@
 
 
 		}
+	}
 		
 		class Enemy{
 			var xPos; 
@@ -237,7 +247,7 @@
 	 			 r = random(100,255);
 				 g = random(100,255);
 				 b = random(100,255);
-				 d = random(10,100);
+				 d = random(50,100);
 	 			 drawEnemy();
 	 			}
 
