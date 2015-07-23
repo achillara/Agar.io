@@ -20,7 +20,7 @@
 		
 		var newEnemy;
 		var listOfEnemy =[]; 
-		
+
 		var numHole = 10;
 		var listOfHole = [];
 		
@@ -45,12 +45,15 @@
 
 			//this is the enemy class
 			for( i =0 ;i< 2;i++){
-			 	newEnemy= new Enemy(100,100,2,2,200,255);
+				var newSpeed = 5
+				var r = random(100,255)
+				var g = random(100,255)
+				var b = random(100,255)
+			 	newEnemy= new Enemy(100,100, newSpeed, newSpeed, r, g, b);
 			 	listOfEnemy.push(newEnemy);
 			}
 
 			/* THIS IS THE NEW STAR CODE */
-
 			for(i = 0; i < numStars; i++) {
 					 newStarXPos = random(0, 1900);
 					 newStarYPos = random(0, 920);
@@ -73,6 +76,7 @@
 			background(0,0,0);
 			newStarXPos = random(0, 1900);
 			newStarYPos = random(0, 920);
+
 			// draw a star 
 			for (var i = 0;i<numStars;i++){
 				 newStar = listOfStar[i];
@@ -91,13 +95,13 @@
 
 			//draws enemy
 			for(i = 0; i < 2; i++){
-				 newEnemy = listOfEnemy[i];
+				newEnemy = listOfEnemy[i];
 				newEnemy.drawEnemy();
 				newEnemy.moveEnemy();
 			}
 			for(i = 0; i < 2; i++) {
-					newHole= listOfHole[i];
-					newHole.drawHole();
+				newHole= listOfHole[i];
+				newHole.drawHole();
 				}
 			
 			// draws planets
@@ -178,20 +182,22 @@
 		class Enemy{
 			var xPos; 
 			var yPos; 
-			var speedX; 
+			var speedX;
+			var speedY;
 			var size; 
 			var r; 
 			var g; 
 			var b;
 			var d; 
 
-			Enemy(xPos1,yPos1,speedX1,r1,g1,b1) {
+			Enemy(xPos1,yPos1,speedx1, speedy1,r1,g1,b1) {
 					xPos = xPos1; 
 					yPos = yPos1;
 					r = r1;
 					g = g1;
 					b = b1; 
-					speedX = speedX1; 
+					speedX = speedx1;
+					speedY = speedy1;
 					d = 30;
 			}
 			
@@ -203,8 +209,12 @@
 
 			void moveEnemy(){ 
 				xPos = xPos + speedX; 
-				if(xPos< 0||xPos> 1920){
-					xPos = xPos *-1;  
+				yPos = yPos + speedY;
+				if(xPos < 0 || xPos > 1920){
+					speedX = speedX * -1;  
+				}
+				if(yPos < 0 || yPos > 920){
+					speedY = speedY *-1
 				}
 			}
 
