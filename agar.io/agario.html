@@ -3,7 +3,7 @@
 		<script src="processing-1.4.1.js"></script>
 		<script type="text/processing" data-processing-target="mycanvas">
 
-		var star; 
+		PImage star;
 		var listOfStar =[];
 		var numStars = 200;
 		var planet;
@@ -14,11 +14,13 @@
 		var newStar;
 		float targetX, targetY;
 		float easing = 0.05;
+		//star = loadImage("goldenstar.png");
 
 		void setup(){
+			star = loadImage("goldenstar.png");
 			// this sets up the black background
 			size(1900,920);
-			background(0,0,0);
+			background(255,255,255);
 			//this loop iterates through all the stars and puts them in random places
 			// iterates through the planets 
 			for (i = 0; i < numPlanet; i++){
@@ -42,7 +44,7 @@
 		}
 
 		void draw(){
-			background(0,0,0);
+			background(255,255,255);
 			// draw a star 
 			for (var i = 0;i<5;i++){
 				 newStar = listOfStar[i];
@@ -82,22 +84,14 @@
 			//attribut+es
  			var xPos;
  			var yPos;
-	 		var r;
-	 		var g;
-	 		var b;
 
 		 	Star (xPosition, yPosition) {
 		 		xPos = xPosition;
 		 		yPos = yPosition;
-		 		r = 250;
-		 		g = 251;
-		 		b = 142;
 	 			}
 
 	 		void drawStar() {
-	 			noStroke();
-				fill(r, g, b);
-				ellipse(xPos, yPos, 10, 10);
+				image(star, xPos, yPos, 20, 20);
 	 		}	
 
 		}
