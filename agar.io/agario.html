@@ -20,6 +20,7 @@
 			var ypos;
 			
 			var newEnemy;
+			var numEnemy =1;
 			var listOfEnemy =[]; 
 
 			var numHole = 10;
@@ -27,6 +28,10 @@
 			
 			float targetX, targetY;
 			float easing = 0.05;
+
+			var r; 
+			var g; 
+			var b; 
 			//star = loadImage("goldenstar.png");
 
 		void setup(){
@@ -45,11 +50,11 @@
 			noStroke();
 
 			//this is the enemy class
-			for( i =0 ;i< 2;i++){
-				var newSpeed = 5
-				var r = random(100,255)
-				var g = random(100,255)
-				var b = random(100,255)
+			for( i =0 ;i< numEnemy;i++){
+				var newSpeed = 2;
+				 r = random(100,255)
+				 g = random(100,255)
+				 b = random(100,255)
 			 	newEnemy= new Enemy(100,100, newSpeed, newSpeed, r, g, b);
 			 	listOfEnemy.push(newEnemy);
 			}
@@ -95,11 +100,13 @@
 			  	}
 
 			//draws enemy
-			for(i = 0; i < 2; i++){
+			if (numEnemy>0){
+			for(i = 0; i < numEnemy; i++){
 				newEnemy = listOfEnemy[i];
 				newEnemy.drawEnemy();
 				newEnemy.moveEnemy();
 			}
+		}
 			for(i = 0; i < 2; i++) {
 				newHole= listOfHole[i];
 				newHole.drawHole();
@@ -174,10 +181,15 @@
 				if( xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
 					println(xpos);
 				if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
-					d = d+(enemy.d/28);				
+					d = d+(enemy.d/28);	
+					enemy.teleport();
+					}
 				}
-				}
+
+
 			}
+
+
 		}
 		
 		class Enemy{
@@ -219,10 +231,19 @@
 				}
 			}
 
-			void disappear(){ 
-				d = 0;
-				drawEnemy();
-			}
+				void teleport(){
+	 			 xPos = newStarXPos; 
+	 			 yPos = newStarYPos;
+	 			 r = random(100,255);
+				 g = random(100,255);
+				 b = random(100,255);
+				 d = random(10,100);
+	 			 drawEnemy();
+	 			}
+
+
+
+			
 		}
 
 		class Blackhole{ 
