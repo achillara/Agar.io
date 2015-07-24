@@ -249,42 +249,58 @@
 	 				for( var i = 0; i < 5; i++){
 	 					if(enemy.d> d){
 							if(xpos> enemy.xPos){
-								enemy.xPos = enemy.xPos+1; 
-								println("the enemy is " + enemy.xPos);
-								increaseEnemy(enemy);
+								if(enemy.xPos> 0 && enemy.xPos<1920){
+									enemy.xPos = enemy.xPos+1; 
+									println("the enemy is " + enemy.xPos);
+									increaseEnemy(enemy);
+								}
 							}
 							else if(xpos< enemy.xPos){
-								enemy.xPos = enemy.xPos-1;
-								increaseEnemy(enemy);
+								if(enemy.xPos> 0 && enemy.xPos<1920){
+									enemy.xPos = enemy.xPos-1;
+									increaseEnemy(enemy);
+								}	
 							}
 							if(ypos> enemy.yPos){
-								enemy.yPos = enemy.yPos+1; 
-								increaseEnemy(enemy);
-								}						
+								if(enemy.yPos> 0 && enemy.yPos<920){
+									enemy.yPos = enemy.yPos+1; 
+									increaseEnemy(enemy);
+								}	
+							}					
 							else if(ypos< enemy.yPos){
-								enemy.yPos = enemy.yPos-1;
-								increaseEnemy(enemy);
+								if(enemy.yPos> 0 && enemy.yPos<920){
+									enemy.yPos = enemy.yPos-1;
+									increaseEnemy(enemy);
+								}
 							}
 						}
 						else if(enemy.d< d){
 							println("hello");
 							if(xpos> enemy.xPos){
+								if(enemy.xPos> 0 && enemy.xPos<1920){
 									enemy.xPos = enemy.xPos-1; 
 									println("the enemy is " + enemy.xPos);
 									increaseEnemy(enemy);
+									}
 								}
 								else if(xpos< enemy.xPos){
-									enemy.xPos = enemy.xPos+1;
-									increaseEnemy(enemy);
+									if(enemy.xPos> 0 && enemy.xPos<1920){
+										enemy.xPos = enemy.xPos+1;
+										increaseEnemy(enemy);
+									}
 								}	
 
 								if(ypos> enemy.yPos){
-									enemy.yPos = enemy.yPos-1; 
-									increaseEnemy(enemy);
+									if(enemy.yPos> 0 && enemy.yPos<920){
+										enemy.yPos = enemy.yPos-1; 
+										increaseEnemy(enemy);
+										}
 									}						
 								else if(ypos< enemy.yPos){
-									enemy.yPos = enemy.yPos+1;
-									increaseEnemy(enemy);
+									if(enemy.yPos> 0 && enemy.yPos<920){
+										enemy.yPos = enemy.yPos+1;
+										increaseEnemy(enemy);
+										}	
 									}
 								}
 							}
