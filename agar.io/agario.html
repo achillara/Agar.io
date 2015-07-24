@@ -23,7 +23,7 @@
 			var numEnemy =5;
 			var listOfEnemy =[]; 
 
-			var numHole = 10;
+			var numHole = 1;
 			var listOfHole = [];
 			
 			float targetX, targetY;
@@ -32,6 +32,8 @@
 			var r; 
 			var g; 
 			var b; 
+
+			var number; 
 			//star = loadImage("goldenstar.png");
 
 		void setup(){
@@ -89,7 +91,7 @@
 
 			//draws enemy
 
-			for(i = 0; i < 2; i++) {
+			for(i = 0; i < numHole; i++) {
 				newHole= listOfHole[i];
 				newHole.drawHole();
 				}
@@ -98,7 +100,7 @@
 			for(i = 0; i < numPlanet; i++){
 				planet = listOfPlanet[i];
 				planet.drawPlanet();
-				
+				planet.looseMass(newHole);
 				planet.eatStars(newStar);
 			}
 
@@ -187,20 +189,34 @@
 				println(d); 
 			}
 			void eatStars(newStar){ 
-				if (xpos<= newStar.xPos+20 && xpos>=newStar.xPos-20){
-				  	if(ypos<= newStar.yPos+20 && ypos>=newStar.yPos-20) {
+				number = d/2; 
+				if (xpos<= newStar.xPos+number && xpos>=newStar.xPos-number){
+				  	if(ypos<= newStar.yPos+ number&& ypos>=newStar.yPos-number) {
 					 	newStar.teleport();
 					 	increaseStar();
 						}
 				}		
 		}
 
+		void looseMass(blackhole){ 
+			if (xpos<= blackhole.xPos+30 && xpos>=blackhole.xPos-30){
+			 	println("MADISOOONNNNNNNN");
+			  if(ypos<= blackhole.yPos+30 && ypos>=blackhole.yPos-30){
+			  		println("BLACKKKKKKKKKKKKKKKKKKKKHOLLLLLLLLLLLLLLLLLLLEEEEEEEEEEEEEEEEEEEEEEE");
+			  		d= d-10;
+			  		
+
+			  	 }
+
+			 }
+
+
+		}
+
 		void chased(enemy){
 			enemy.moveEnemy();
-			if (xpos<= enemy.xPos+70 && xpos>=enemy.xPos-70){
-			 	println("MADISOOONNNNNNNN");
-			  	if(ypos<= enemy.yPos+70 && ypos>=enemy.yPos-70){
-			  		println("okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+			if (xpos<= enemy.xPos+d && xpos>=enemy.xPos-d){
+			  	if(ypos<= enemy.yPos+d && ypos>=enemy.yPos-d){
 	 				for( var i = 0; i < 5; i++){
 	 					if(enemy.d> d){
 							if(xpos> enemy.xPos){
@@ -321,7 +337,7 @@
 	 			}		
 
 	 			void eatStars(newStar){
-	 			var number = d/2; 
+	 			number = d/2; 
 				if (xPos<= newStar.xPos+number && xPos>=newStar.xPos-number){
 				  	if(yPos<= newStar.yPos+number && yPos>=newStar.yPos-number) {
 					 	newStar.teleport();
@@ -343,6 +359,8 @@
 			void drawHole(){ 
 				image(blackhole, xPos, yPos, 50, 50);
 			}
+
+
 		}
 		//Hello. This is a side note, coming for your soul.	
 		</script> 
