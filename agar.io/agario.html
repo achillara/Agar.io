@@ -55,8 +55,8 @@
 
 			//this is the enemy class
 			for( i =0 ;i< numEnemy;i++){
-				var newSpeedX = random(4, 6);
-				var newSpeedY = random(4, 6);
+				var newSpeedX = 5;
+				var newSpeedY = 5;
 
 				 r = random(100,255)
 				 g = random(100,255)
@@ -199,7 +199,7 @@
 				if (d > 60 && d<=70){
 					
 					easing = .04;
-					println(" the easing is " +  easing);
+				
 				}
 				else if( d> 70 && d<=150){
 					easing = .03;
@@ -258,24 +258,45 @@
 									enemy.xPos = enemy.xPos+1; 
 									println("the enemy is " + enemy.xPos);
 									increaseEnemy(enemy);
+										if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  								if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  									enemy.moveEnemy();
+			  								}
+			  							}
+									
 								}
 							}
 							else if(xpos< enemy.xPos){
 								if(enemy.xPos> 0 && enemy.xPos<1920){
 									enemy.xPos = enemy.xPos-1;
 									increaseEnemy(enemy);
+									if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  								if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  									println(" WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+			  								}
+			  							}
 								}	
 							}
 							if(ypos> enemy.yPos){
 								if(enemy.yPos> 0 && enemy.yPos<920){
 									enemy.yPos = enemy.yPos+1; 
 									increaseEnemy(enemy);
+									if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  								if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  									enemy.moveEnemy();
+			  								}
+			  							}
 								}	
 							}					
 							else if(ypos< enemy.yPos){
 								if(enemy.yPos> 0 && enemy.yPos<920){
 									enemy.yPos = enemy.yPos-1;
 									increaseEnemy(enemy);
+									if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  								if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  									enemy.moveEnemy();
+			  								}
+			  							}
 								}
 							}
 						}
@@ -286,12 +307,22 @@
 									enemy.xPos = enemy.xPos-1; 
 									println("the enemy is " + enemy.xPos);
 									increaseEnemy(enemy);
+									if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  								if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  									println(" WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+			  								}
+			  							}
 									}
 								}
 								else if(xpos< enemy.xPos){
 									if(enemy.xPos> 0 && enemy.xPos<1920){
 										enemy.xPos = enemy.xPos+1;
 										increaseEnemy(enemy);
+										if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  								if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  									println(" WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+			  								}
+			  							}
 									}
 								}	
 
@@ -299,12 +330,22 @@
 									if(enemy.yPos> 0 && enemy.yPos<920){
 										enemy.yPos = enemy.yPos-1; 
 										increaseEnemy(enemy);
+										if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  								if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  									println(" WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+			  								}
+			  							}
 										}
 									}						
 								else if(ypos< enemy.yPos){
 									if(enemy.yPos> 0 && enemy.yPos<920){
 										enemy.yPos = enemy.yPos+1;
 										increaseEnemy(enemy);
+										if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  								if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  									println(" WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+			  								}
+			  							}
 										}	
 									}
 								}
@@ -368,17 +409,20 @@
 			}
 			void slowDownEnemy(){ 
 				if (d > 60 && d<=70){
-					easing = .04;
-					println(" the easing is " +  easing);
+					speedX = 4; 
+					
 				}
 				else if( d> 70 && d<=150){
-					easing = .03;
+					speedX = 3; 
+				
 				}
 				else if( d> 150 && d<=200){
-					easing = .02;
+					speedX = 2; 
+					
 				}
 				else if( d> 200 ){
-					easing = .01;
+					speedX = 1; 
+				
 				}
 				
 
