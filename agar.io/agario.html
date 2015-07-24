@@ -154,6 +154,24 @@
 
 			  		}
 			  	}
+			  	for (var i = 0; i<numMeteor;i++){
+			  		for(var t = 0; t < numEnemy; t++){
+			  			newEnemy = listOfEnemy[t];
+			  			 newMeteor = listOfMeteor[i];
+			  			 newEnemy.looseD(newMeteor);
+
+			  		}
+			  	}
+
+			  	for (var i = 0; i<numHole;i++){
+			  		for(var t = 0; t < numEnemy; t++){
+			  			newEnemy = listOfEnemy[t];
+			  			newHole = listOfHole[i];
+			  			newEnemy.looseMass(newHole);
+
+			  		}
+			  	}
+
 
 		  	targetX = mouseX;
 		 	float dx = mouseX - xpos;
@@ -439,6 +457,22 @@
 				fill(r,g,b);
 				ellipse(xPos, yPos,d,d);
 				}
+			void looseMass(blackhole){ 
+					number = d/2;
+					if (xPos<= blackhole.xPos+number && xPos>=blackhole.xPos-number){
+					 	println("MADISOOONNNNNNNN");
+					  if(yPos<= blackhole.yPos+number && yPos>=blackhole.yPos-number){
+					  		println("BLACKKKKKKKKKKKKKKKKKKKKHOLLLLLLLLLLLLLLLLLLLEEEEEEEEEEEEEEEEEEEEEEE");
+					  		d= d-(d/3);
+					  		println(" d is "+ d);
+					  		
+
+					  	 }
+
+					 }
+
+
+				}
 
 			void increaseStar(){
 				d=d+1;
@@ -464,6 +498,22 @@
 				
 
 			}
+
+			void looseD( meteor){
+			number = d/2;
+			if (xPos<= meteor.xPos+number && xPos>=meteor.xPos-number){
+			  if(yPos<= meteor.yPos+number && yPos>=meteor.yPos-number){
+			  		println("meteorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr showwwwwwwwwwwwwwwwwerrrrrrrrrrrrrrrrrrrrrrrrrr");
+			  		d= d-10;
+			  		println(" d is "+ d);
+			  		
+
+			  	 }
+
+			 }
+
+
+		}
 
 			void moveEnemy(){ 
 				xPos = xPos + speedX; 
