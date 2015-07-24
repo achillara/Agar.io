@@ -101,7 +101,9 @@
 				planet = listOfPlanet[i];
 				planet.drawPlanet();
 				planet.looseMass(newHole);
-				planet.eatStars(newStar);
+				planet.eatStars(newStar); 
+				planet.slowDownPlanet();
+
 			}
 
 			if (numEnemy>0){
@@ -123,8 +125,7 @@
 			  		for(var t = 0; t < numEnemy; t++){
 			  			newEnemy = listOfEnemy[t];
 			  			 newStar = listOfStar[i];
-			  			 //newStar.drawStar();
-			  			 //newEnemy.drawEnemy();
+			  		
 			  			 newEnemy.eatStars(newStar);
 
 			  		}
@@ -187,6 +188,24 @@
 			void increaseStar(){
 				d=d+1;
 				println(d); 
+			}
+			void slowDownPlanet(){ 
+				if (d > 60 && d<=70){
+					println(" my life is 	CHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESES");
+					easing = .04;
+					println(" the easing is " +  easing);
+				}
+				else if( d> 70 && d<=150){
+					easing = .03;
+				}
+				else if( d> 150 && d<=200){
+					easing = .02;
+				}
+				else if( d> 200 ){
+					easing = .01;
+				}
+				
+
 			}
 			void eatStars(newStar){ 
 				number = d/2; 
