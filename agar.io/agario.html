@@ -228,11 +228,16 @@
 				 
 
 		void looseMass(blackhole){ 
-			if (xpos<= blackhole.xPos+30 && xpos>=blackhole.xPos-30){
+			number = d/2;
+			if (xpos<= blackhole.xPos+number && xpos>=blackhole.xPos-number){
 			 	println("MADISOOONNNNNNNN");
-			  if(ypos<= blackhole.yPos+30 && ypos>=blackhole.yPos-30){
+			  if(ypos<= blackhole.yPos+number && ypos>=blackhole.yPos-number){
 			  		println("BLACKKKKKKKKKKKKKKKKKKKKHOLLLLLLLLLLLLLLLLLLLEEEEEEEEEEEEEEEEEEEEEEE");
 			  		d= d-10;
+			  		println(" d is "+ d);
+			  		if( d < 0 ){ 
+			  			exit();
+			  		}
 			  		
 
 			  	 }
