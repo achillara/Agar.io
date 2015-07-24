@@ -51,13 +51,15 @@
 
 			//this is the enemy class
 			for( i =0 ;i< numEnemy;i++){
-				var newSpeed = 2;
+				var newSpeedX = random(4, 6);
+				var newSpeedY = random(4, 6);
+
 				 r = random(100,255)
 				 g = random(100,255)
 				 b = random(100,255)
 				 var randX = random(0, 1920)
-				 var randY = random( 0,920);
-			 	newEnemy= new Enemy(randX,randY, newSpeed, newSpeed, r, g, b);
+				 var randY = random(0,920);
+			 	newEnemy= new Enemy(randX,randY, newSpeedX, newSpeedY, r, g, b);
 			 	listOfEnemy.push(newEnemy);
 			}
 
@@ -105,9 +107,10 @@
 			if (numEnemy>0){
 			for(i = 0; i < numEnemy; i++){
 				newEnemy = listOfEnemy[i];
-				newEnemy.drawEnemy();
-				newEnemy.moveEnemy();
 				planet.increaseEnemy(newEnemy);
+				planet.chased(newEnemy);
+				newEnemy.drawEnemy();
+
 			}
 		}
 			// draw a star 
@@ -188,6 +191,60 @@
 				}
 				
 		}
+		void chased(enemy){
+			enemy.moveEnemy();
+			if (xpos<= enemy.xPos+70 && xpos>=enemy.xPos-70){
+			 	println("MADISOOONNNNNNNN");
+			  	if(ypos<= enemy.yPos+70 && ypos>=enemy.yPos-70){
+			  		println("okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+	 				for( var i = 0; i < 5; i++){
+	 					if(enemy.d> d){
+							if(xpos> enemy.xPos){
+								enemy.xPos = enemy.xPos+1; 
+								println("the enemy is " + enemy.xPos);
+								increaseEnemy(enemy);
+							}
+							else if(xpos< enemy.xPos){
+								enemy.xPos = enemy.xPos-1;
+								increaseEnemy(enemy);
+							}
+							if(ypos> enemy.yPos){
+								enemy.yPos = enemy.yPos+1; 
+								increaseEnemy(enemy);
+								}						
+							else if(ypos< enemy.yPos){
+								enemy.yPos = enemy.yPos-1;
+								increaseEnemy(enemy);
+							}
+						}
+						else if(enemy.d< d){
+							println("hello");
+							if(xpos> enemy.xPos){
+									enemy.xPos = enemy.xPos-1; 
+									println("the enemy is " + enemy.xPos);
+									increaseEnemy(enemy);
+								}
+								else if(xpos< enemy.xPos){
+									enemy.xPos = enemy.xPos+1;
+									increaseEnemy(enemy);
+								}	
+
+								if(ypos> enemy.yPos){
+									enemy.yPos = enemy.yPos-1; 
+									increaseEnemy(enemy);
+									}						
+								else if(ypos< enemy.yPos){
+									enemy.yPos = enemy.yPos+1;
+									increaseEnemy(enemy);
+									}
+								}
+							}
+						}	
+	 				}
+	 			}
+	 		
+
+	 	
 
 			
 			void increaseEnemy(enemy){ 
@@ -261,6 +318,8 @@
 				 d = random(50,100);
 	 			 drawEnemy();
 	 			}
+
+	 			
 
 
 
