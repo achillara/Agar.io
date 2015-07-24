@@ -87,8 +87,6 @@
 			newStarXPos = random(0, 1900);
 			newStarYPos = random(0, 920);
 
-			
-
 			//draws enemy
 
 			for(i = 0; i < 2; i++) {
@@ -110,15 +108,26 @@
 				planet.increaseEnemy(newEnemy);
 				planet.chased(newEnemy);
 				newEnemy.drawEnemy();
-
+				}
 			}
-		}
 			// draw a star 
 			for (var i = 0;i<numStars;i++){
 				 newStar = listOfStar[i];
 				 newStar.drawStar();
-				 planet.eatStars(newStar); 
+				 planet.eatStars(newStar);
+				
 			  	}
+			  	for (var i = 0; i<numStars;i++){
+			  		for(var t = 0; t < numEnemy; t++){
+			  			newEnemy = listOfEnemy[t];
+			  			 newStar = listOfStar[i];
+			  			 //newStar.drawStar();
+			  			 //newEnemy.drawEnemy();
+			  			 newEnemy.eatStars(newStar);
+
+			  		}
+			  	}
+
 		  	targetX = mouseX;
 		 	float dx = mouseX - xpos;
 		  	if(abs(dx) > 1) {
@@ -133,7 +142,7 @@
 		  	}
 		}
 
-		class Star {
+		class Star{
  			var xPos;
  			var yPos;
 
@@ -150,9 +159,7 @@
 	 			 xPos = newStarXPos; 
 	 			 yPos = newStarYPos;
 	 			 drawStar();
-	 		}
-	 		
-
+	 		}	
 		}
 
 		class Planet{
@@ -181,16 +188,13 @@
 			}
 			void eatStars(newStar){ 
 				if (xpos<= newStar.xPos+20 && xpos>=newStar.xPos-20){
-			  			
 				  	if(ypos<= newStar.yPos+20 && ypos>=newStar.yPos-20) {
-					 	println("the circle is at x position:" + xpos + " and the y position of the circle is at : "+ ypos +" the star is at xpos " + newStar.xPos + " the star is at ypos " + newStar.yPos);
-
 					 	newStar.teleport();
 					 	increaseStar();
 						}
-				}
-				
+				}		
 		}
+
 		void chased(enemy){
 			enemy.moveEnemy();
 			if (xpos<= enemy.xPos+70 && xpos>=enemy.xPos-70){
@@ -242,10 +246,6 @@
 						}	
 	 				}
 	 			}
-	 		
-
-	 	
-
 			
 			void increaseEnemy(enemy){ 
 				if( xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
@@ -261,14 +261,10 @@
 							
 							enemy.teleport();
 							}
+						}
 				}
-
-
 			}
-
-
 		}
-	}
 		
 		class Enemy{
 			var xPos; 
@@ -298,6 +294,11 @@
 				ellipse(xPos, yPos,d,d);
 				}
 
+			void increaseStar(){
+				d=d+1;
+				println(d); 
+			}
+
 			void moveEnemy(){ 
 				xPos = xPos + speedX; 
 				yPos = yPos + speedY;
@@ -317,13 +318,17 @@
 				 b = random(100,255);
 				 d = random(50,100);
 	 			 drawEnemy();
-	 			}
+	 			}		
 
-	 			
-
-
-
-			
+	 			void eatStars(newStar){
+	 			var number = d/2; 
+				if (xPos<= newStar.xPos+number && xPos>=newStar.xPos-number){
+				  	if(yPos<= newStar.yPos+number && yPos>=newStar.yPos-number) {
+					 	newStar.teleport();
+					 	increaseStar();
+						}
+				}		
+			}	
 		}
 
 		class Blackhole{ 
