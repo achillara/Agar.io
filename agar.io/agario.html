@@ -26,6 +26,10 @@
 
 			var numHole = 3;
 			var listOfHole = [];
+
+			var listOfMeteor =[];
+			var numMeteor=5;
+			var newMeteor;
 			
 			float targetX, targetY;
 			float easing = 0.05;
@@ -86,6 +90,12 @@
 					listOfHole.push(newHole); //store BlackHoles in list
 					
 				}
+				for(i = 0; i < numMeteor; i++) {
+					newHoleXPos = random(0, 200);
+					newHoleYPos = random(0, 200);
+					newMeteor = new Meteor(newHoleXPos, newHoleYPos,3,3); //make a new Stars
+					listOfMeteor.push(newMeteor); //store BlackHoles in list
+				}
 		}
 
 		void draw(){
@@ -93,7 +103,6 @@
 			newStarXPos = random(0, 1900);
 			newStarYPos = random(0, 920);
 
-			//draws enemy
 
 
 			// draws planets
@@ -104,6 +113,14 @@
 				planet.eatStars(newStar); 
 				planet.slowDownPlanet();
 
+
+			}
+			
+			for(i = 0; i < numMeteor; i++){
+				newMeteor = listOfMeteor[i];
+				newMeteor.drawMeteor();
+				newMeteor.shower();
+				planet.looseD(newMeteor);
 			}
 			for(i = 0; i < numHole; i++) {
 				newHole= listOfHole[i];
@@ -133,7 +150,6 @@
 			  		for(var t = 0; t < numEnemy; t++){
 			  			newEnemy = listOfEnemy[t];
 			  			 newStar = listOfStar[i];
-			  		
 			  			 newEnemy.eatStars(newStar);
 
 			  		}
@@ -235,6 +251,25 @@
 			 	println("MADISOOONNNNNNNN");
 			  if(ypos<= blackhole.yPos+number && ypos>=blackhole.yPos-number){
 			  		println("BLACKKKKKKKKKKKKKKKKKKKKHOLLLLLLLLLLLLLLLLLLLEEEEEEEEEEEEEEEEEEEEEEE");
+			  		d= d-10;
+			  		println(" d is "+ d);
+			  		if( d < 0 ){ 
+			  			exit();
+			  		}
+			  		
+
+			  	 }
+
+			 }
+
+
+		}
+
+		void looseD( meteor){
+			number = d/2;
+			if (xpos<= meteor.xPos+number && xpos>=meteor.xPos-number){
+			  if(ypos<= meteor.yPos+number && ypos>=meteor.yPos-number){
+			  		println("meteorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr showwwwwwwwwwwwwwwwwerrrrrrrrrrrrrrrrrrrrrrrrrr");
 			  		d= d-10;
 			  		println(" d is "+ d);
 			  		if( d < 0 ){ 
@@ -486,14 +521,24 @@
 		class Meteor{
 			var xPos;
 			var yPos;
+			var xSpeed; 
+			var ySpeed; 
 
-			Meteor(xPosition, yPosition){
+			Meteor(xPosition, yPosition,xSpeed1,ySpeed2){
 				xPos = xPosition;
-				yPos = yPosition;	
+				yPos = yPosition;
+				xSpeed = xSpeed1;
+				ySpeed = ySpeed2;
 			}
 
 			void drawMeteor(){
 				image(meteor, xPos, yPos, 70, 70);
+			}
+
+			void shower(){
+				xPos = xPos + xSpeed; 
+				yPos = yPos + ySpeed; 
+
 			}
 		}
 
