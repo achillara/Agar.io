@@ -134,9 +134,10 @@
 			for(i = 0; i < numEnemy; i++){
 				newEnemy = listOfEnemy[i];
 				planet.increaseEnemy(newEnemy);
-				planet.chased(newEnemy);
+				//planet.chased(newEnemy);
+				newEnemy.moveEnemy();
 				newEnemy.drawEnemy();
-				newEnemy.slowDownEnemy();
+				//newEnemy.slowDownEnemy();
 				}
 			}
 			// draw a star 
@@ -418,6 +419,7 @@
 							if((enemy.d +5)>=d){
 								println(" YOU LOSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 								exit();
+							
 							}
 							else if(enemy.d<=(d+5)){
 								d = d+(enemy.d/28);	
@@ -587,17 +589,16 @@
 
 			void shower(){
 				xPos = xPos + xSpeed; 
-				yPos = yPos + ySpeed; 
+				yPos = yPos + ySpeed;
+				
+				if(xPos > 5000){
+					xPos= random(0,300);
+					yPos = random(0,300);
+					
+				}
 
 			}
 		}
-
-
-
-
-
-
-
 
 		//Hello. This is a side note, coming for your soul.	
 		</script> 
