@@ -6,6 +6,7 @@
 		//All of the Variables at present.
 			PImage star;
 			PImage blackhole;
+			PImage meteor;
 			var listOfStar =[];
 			var numStars = 200;
 			var newStar;
@@ -41,6 +42,7 @@
 		void setup(){
 			star = loadImage("goldenstar.png");
 			blackhole = loadImage("blackhole.png");
+			meteor = loadImage("meteor.png")
 			// this sets up the black background
 			size(1900,920);
 			background(0,0,0);
@@ -476,9 +478,32 @@
 			void drawHole(){ 
 				image(blackhole, xPos, yPos, 50, 50);
 			}
-
-
 		}
+
+
+
+
+		class Meteor{
+			var xPos;
+			var yPos;
+
+			Meteor(xPosition, yPosition){
+				xPos = xPosition;
+				yPos = yPosition;	
+			}
+
+			void drawMeteor(){
+				image(meteor, xPos, yPos, 70, 70);
+			}
+		}
+
+
+
+
+
+
+
+
 		//Hello. This is a side note, coming for your soul.	
 		</script> 
 	</head>
