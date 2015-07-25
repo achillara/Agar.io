@@ -34,6 +34,8 @@
 			var b; 
 
 			var number; 
+
+			var maxSize = 300;
 			//star = loadImage("goldenstar.png");
 
 		void setup(){
@@ -209,13 +211,17 @@
 			}
 			void eatStars(newStar){ 
 				number = d/2; 
-				if (xpos<= newStar.xPos+number && xpos>=newStar.xPos-number){
-				  	if(ypos<= newStar.yPos+ number&& ypos>=newStar.yPos-number) {
-					 	newStar.teleport();
-					 	increaseStar();
-						}
-				}		
-		}
+				if(d < maxSize){
+					if (xpos<= newStar.xPos+number && xpos>=newStar.xPos-number){
+					  	if(ypos<= newStar.yPos+ number&& ypos>=newStar.yPos-number) {
+						 	newStar.teleport();
+						 	increaseStar();
+							}
+		
+					}
+			}		
+		} 
+				 
 
 		void looseMass(blackhole){ 
 			if (xpos<= blackhole.xPos+30 && xpos>=blackhole.xPos-30){
@@ -283,20 +289,22 @@
 	 			}
 			
 			void increaseEnemy(enemy){ 
-				if( xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
-					println("this xpos is " + xpos);
-				if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
-					println("the enemy.d is " + enemy.d + " and the d of planet is " + d);
-						if((enemy.d +5)>=d){
-							println(" YOU LOSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-							exit();
-						}
-						else if(enemy.d<=(d+5)){
-							d = d+(enemy.d/28);	
-							
-							enemy.teleport();
+				if (d < maxSize){
+					if( xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
+						println("this xpos is " + xpos);
+					if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
+						println("the enemy.d is " + enemy.d + " and the d of planet is " + d);
+							if((enemy.d +5)>=d){
+								println(" YOU LOSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+								exit();
 							}
-						}
+							else if(enemy.d<=(d+5)){
+								d = d+(enemy.d/28);	
+								
+								enemy.teleport();
+								}
+							}
+					}
 				}
 			}
 		}
@@ -357,13 +365,17 @@
 
 	 			void eatStars(newStar){
 	 			number = d/2; 
+	 			if(d < maxSize){
 				if (xPos<= newStar.xPos+number && xPos>=newStar.xPos-number){
 				  	if(yPos<= newStar.yPos+number && yPos>=newStar.yPos-number) {
 					 	newStar.teleport();
 					 	increaseStar();
 						}
-				}		
-			}	
+				}	
+
+			   }	
+			}
+
 		}
 
 		class Blackhole{ 
