@@ -7,6 +7,8 @@
 			PImage star;
 			PImage blackhole;
 			PImage meteor;
+			PFont font;
+
 			var listOfStar =[];
 			var numStars = 200;
 			var newStar;
@@ -43,10 +45,12 @@
 			var maxSize = 300;
 			//star = loadImage("goldenstar.png");
 
+
+
 		void setup(){
 			star = loadImage("goldenstar.png");
 			blackhole = loadImage("blackhole.png");
-			meteor = loadImage("meteor.png")
+			meteor = loadImage("meteor.png");
 			// this sets up the black background
 			size(1900,920);
 			background(0,0,0);
@@ -97,6 +101,7 @@
 					listOfMeteor.push(newMeteor); //store BlackHoles in list
 				}
 		}
+
 
 		void draw(){
 			background(0,0,0);
@@ -272,7 +277,10 @@
 			  		println("BLACKKKKKKKKKKKKKKKKKKKKHOLLLLLLLLLLLLLLLLLLLEEEEEEEEEEEEEEEEEEEEEEE");
 			  		d= d-10;
 			  		println(" d is "+ d);
-			  		if( d < 0 ){ 
+			  		if( d < 5 ){ 
+			  			font = loadFont("Lato-Black.ttf"); 
+						textFont(font); 		
+						text("YOU LOSE", 960, 450,300,100); 
 			  			exit();
 			  		}
 			  		
@@ -291,8 +299,11 @@
 			  		println("meteorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr showwwwwwwwwwwwwwwwwerrrrrrrrrrrrrrrrrrrrrrrrrr");
 			  		d= d-10;
 			  		println(" d is "+ d);
-			  		if( d < 0 ){ 
-			  			exit();
+			  		if( d < 5 ){
+			  		font = loadFont("Lato-Black.ttf"); 
+					textFont(font); 		
+					text("YOU LOSE", 960, 450,300,100);  
+			  		exit();
 			  		}
 			  		
 
@@ -411,15 +422,17 @@
 	 			}
 			
 			void increaseEnemy(enemy){ 
+				number = d/2;
 				if (d < maxSize){
-					if( xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
+					if( xpos<= enemy.xPos+number && xpos>=enemy.xPos-number){
 						println("this xpos is " + xpos);
-					if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
+					if(ypos<= enemy.yPos+number && ypos>=enemy.yPos-number){
 						println("the enemy.d is " + enemy.d + " and the d of planet is " + d);
 							if((enemy.d +5)>=d){
-								println(" YOU LOSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+								font = loadFont("Lato-Black.ttf"); 
+								textFont(font); 		
+								text("YOU LOSE", 960, 450,300,100); 
 								exit();
-							
 							}
 							else if(enemy.d<=(d+5)){
 								d = d+(enemy.d/28);	
