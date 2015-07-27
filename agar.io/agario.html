@@ -55,6 +55,7 @@
 			blackhole = loadImage("blackhole.png");
 			meteor = loadImage("meteor.png")
 			lose = loadImage("lose.png");
+
 			// this sets up the black background
 			size(1900,920);
 			background(0,0,0);
@@ -114,6 +115,12 @@
 				planet.drawPlanet();
 				planet.eatStars(newStar); 
 				planet.slowDownPlanet();
+				font = loadFont("lato/Lato-Black.ttf"); 
+				textFont(font,50); 
+				fill(255,0,0);
+				int number = round(planet.d);
+
+				text(" SCORE:" + number, 1560,50,300,300);
 			}
 			
 			for(i = 0; i < numMeteor; i++){
@@ -262,10 +269,10 @@
 			  		d= d-10;
 			  		if( d < 3 ){ 
 			  			//document.getElementById("hello").innerHTML="YOU LOSE";
-			  				image(lose, 850,430, 700, 300);
-			  			/*font = loadFont("lato/Lato-Black.ttf"); 
-						textFont(font); 
-						text("YOU LOSE", 960, 470,700,300);*/
+			  			//image(lose,850,430, 700, 300);
+			  			font = loadFont("lato/Lato-Black.ttf"); 
+						textFont(font,200); 
+						text("YOU LOSE", 300, 500);
 			  			exit();
 			  			
 			  		}
@@ -281,13 +288,13 @@
 			  		if( d < 3 ){ 
 			  			//document.getElementById("hello").innerHTML="YOU LOSE";
 
-			  			image(lose,850,430, 700, 300);
+			  			//image(lose,850,430, 700, 300);
 
-			  			/*font = loadFont("Lato/Lato-Black.ttf"); 
+			  			font = loadFont("Lato/Lato-Black.ttf"); 
 
-						textFont(font); 
+						textFont(font,200); 
 
-						text("YOU LOSE", 960, 470, 300,300);*/
+						text("YOU LOSE", 300, 500);
 
 			  		
 			  			exit();
@@ -400,11 +407,11 @@
 				if(xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
 					if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
 						if((enemy.d +5)>=d){
-							image(lose,850,450, 700, 300);
+							//image(lose,850,450, 700, 300);
 							//document.getElementById("hello").innerHTML="YOU LOSE";
-							/*font = loadFont("lato/Lato-Black.ttf"); 
-							textFont(font); 
-							text("YOU LOSE", 960, 470, 300,300); */
+							font = loadFont("lato/Lato-Black.ttf"); 
+							textFont(font,200); 
+							text("YOU LOSE", 300,500);
 				  			exit();
 								
 						}
