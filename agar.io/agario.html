@@ -3,10 +3,15 @@
 		<script src="processing-1.4.1.js"></script>
 		<script type="text/processing" data-processing-target="mycanvas">
 
+
+
 		//All of the Variables at present.
 			PImage star;
 			PImage blackhole;
 			PImage meteor;
+			PImage lose;
+
+			PFont font;
 			var listOfStar =[];
 			var numStars = 200;
 			var newStar;
@@ -44,9 +49,12 @@
 			//star = loadImage("goldenstar.png");
 
 		void setup(){
+
+
 			star = loadImage("goldenstar.png");
 			blackhole = loadImage("blackhole.png");
 			meteor = loadImage("meteor.png")
+			lose = loadImage("lose.png");
 			// this sets up the black background
 			size(1900,920);
 			background(0,0,0);
@@ -252,8 +260,14 @@
 			if (xpos<= blackhole.xPos+number && xpos>=blackhole.xPos-number){
 			  	if(ypos<= blackhole.yPos+number && ypos>=blackhole.yPos-number){
 			  		d= d-10;
-			  		if( d < 0 ){ 
+			  		if( d < 3 ){ 
+			  			//document.getElementById("hello").innerHTML="YOU LOSE";
+			  				image(lose, 850,430, 700, 300);
+			  			/*font = loadFont("lato/Lato-Black.ttf"); 
+						textFont(font); 
+						text("YOU LOSE", 960, 470,700,300);*/
 			  			exit();
+			  			
 			  		}
 			  	}
 			}
@@ -264,8 +278,20 @@
 			if (xpos<= meteor.xPos+number && xpos>=meteor.xPos-number){
 			  	if(ypos<= meteor.yPos+number && ypos>=meteor.yPos-number){
 			  		d= d-10;
-			  		if( d < 0 ){ 
+			  		if( d < 3 ){ 
+			  			//document.getElementById("hello").innerHTML="YOU LOSE";
+
+			  			image(lose,850,430, 700, 300);
+
+			  			/*font = loadFont("Lato/Lato-Black.ttf"); 
+
+						textFont(font); 
+
+						text("YOU LOSE", 960, 470, 300,300);*/
+
+			  		
 			  			exit();
+			  			
 			  		}
 			  	}
 			}
@@ -374,7 +400,13 @@
 				if(xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
 					if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
 						if((enemy.d +5)>=d){
-							exit();
+							image(lose,850,450, 700, 300);
+							//document.getElementById("hello").innerHTML="YOU LOSE";
+							/*font = loadFont("lato/Lato-Black.ttf"); 
+							textFont(font); 
+							text("YOU LOSE", 960, 470, 300,300); */
+				  			exit();
+								
 						}
 					else if(enemy.d<=(d+5)){
 						d = d+(enemy.d/28);				
