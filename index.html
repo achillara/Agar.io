@@ -1,0 +1,573 @@
+<html>
+	<head>
+		<script src="processing-1.4.1.js"></script>
+		<script type="text/processing" data-processing-target="mycanvas">
+
+
+
+		//All of the Variables at present.
+			PImage star;
+			PImage blackhole;
+			PImage meteor;
+			PImage lose;
+
+			PFont font;
+			var listOfStar =[];
+			var numStars = 200;
+			var newStar;
+			var newStarXPos;
+			var newStarYPos;
+
+			var planet;
+			var listOfPlanet = [];
+			var numPlanet = 1;
+			var newPlanet;
+			var xpos;
+			var ypos;
+			
+			var newEnemy;
+			var numEnemy =5;
+			var listOfEnemy =[]; 
+
+			var numHole = 3;
+			var listOfHole = [];
+
+			var listOfMeteor =[];
+			var numMeteor=5;
+			var newMeteor;
+			
+			float targetX, targetY;
+			float easing = 0.05;
+
+			var r; 
+			var g; 
+			var b; 
+
+			var number; 
+
+			var maxSize = 500;
+			//star = loadImage("goldenstar.png");
+
+		void setup(){
+
+
+			star = loadImage("goldenstar.png");
+			blackhole = loadImage("blackhole.png");
+			meteor = loadImage("meteor.png")
+			lose = loadImage("lose.png");
+
+			// this sets up the black background
+			size(1900,920);
+			background(0,0,0);
+			//this loop iterates through all the stars and puts them in random places
+			// iterates through the planets 
+			for (i = 0; i < numPlanet; i++){
+			  		 newPlanet = new Planet();
+			  		listOfPlanet.push(newPlanet);		  	
+			  	}
+			smooth();
+			noStroke();
+
+			//this is the enemy class
+			for( i =0 ;i< numEnemy;i++){
+				var newSpeedX = 5;
+				var newSpeedY = 5;
+				r = random(100,255)
+				g = random(100,255)
+				b = random(100,255)
+				var randX = random(0, 1920)
+				var randY = random(0,920);
+			 	newEnemy= new Enemy(randX,randY, newSpeedX, newSpeedY, r, g, b);
+			 	listOfEnemy.push(newEnemy);
+			}
+
+			/* THIS IS THE NEW STAR CODE */
+			for(i = 0; i < numStars; i++) {
+				newStarXPos = random(0, 1900);
+				newStarYPos = random(0, 920);
+				newStar = new Star(newStarXPos, newStarYPos); //make a new Stars
+				listOfStar.push(newStar); //store Stars in list			
+			}
+			/* END OF NEW STAR CODE */
+			
+			for(i = 0; i < numHole; i++) {
+				newHoleXPos = random(0, 1900);
+				newHoleYPos = random(0, 920);
+				newHole = new Blackhole(newHoleXPos, newHoleYPos); //make a new Stars
+				listOfHole.push(newHole); //store BlackHoles in list				
+				}
+
+			for(i = 0; i < numMeteor; i++) {
+				newHoleXPos = random(0, 500);
+				newHoleYPos = random(0, 300);
+				newMeteor = new Meteor(newHoleXPos, newHoleYPos,5,2); //make a new Stars
+				listOfMeteor.push(newMeteor); //store BlackHoles in list
+			}
+		} //good
+
+		void draw(){
+			background(0,0,0);
+			newStarXPos = random(0, 1900);
+			newStarYPos = random(0, 920);
+			// draws planets
+			for(i = 0; i < numPlanet; i++){
+				planet = listOfPlanet[i];
+				planet.drawPlanet();
+				planet.eatStars(newStar); 
+				planet.slowDownPlanet();
+				font = loadFont("lato/Lato-Black.ttf"); 
+				textFont(font,50); 
+				fill(255,0,0);
+				int number = round(planet.d);
+
+				text(" SCORE:" + number, 1560,50,300,300);
+			}
+			
+			for(i = 0; i < numMeteor; i++){
+				newMeteor = listOfMeteor[i];
+				newMeteor.drawMeteor();
+				newMeteor.shower();
+				planet.looseD(newMeteor);
+			}
+
+			for(i = 0; i < numHole; i++) {
+				newHole= listOfHole[i];
+				newHole.drawHole();
+				planet.looseMass(newHole);
+			}
+
+			if (numEnemy>0){
+				for(i = 0; i < numEnemy; i++){
+					newEnemy = listOfEnemy[i];
+					planet.increaseEnemy(newEnemy);
+					//planet.chased(newEnemy);
+					newEnemy.moveEnemy();
+					newEnemy.drawEnemy();
+					//newEnemy.slowDownEnemy();
+				}
+			}
+			// draw a star 
+			for (var i = 0;i<numStars;i++){
+				newStar = listOfStar[i];
+				newStar.drawStar();
+				planet.eatStars(newStar);
+			}
+			for (var i = 0; i<numStars;i++){
+		  		for(var t = 0; t < numEnemy; t++){
+			  		newEnemy = listOfEnemy[t];
+			  		newStar = listOfStar[i];
+			  		newEnemy.eatStars(newStar);
+			  	}
+			}
+
+			for (var i = 0; i<numMeteor;i++){
+		  		for(var t = 0; t < numEnemy; t++){
+			  		newEnemy = listOfEnemy[t];
+			  			newMeteor = listOfMeteor[i];
+			  			newEnemy.looseD(newMeteor);
+				}
+			}
+
+			for (var i = 0; i<numHole;i++){
+			  	for(var t = 0; t < numEnemy; t++){
+			  		newEnemy = listOfEnemy[t];
+			  		newHole = listOfHole[i];
+			  		newEnemy.looseMass(newHole);
+			  	}
+			}
+
+		  	targetX = mouseX;
+		 	float dx = mouseX - xpos;
+
+		  	if(abs(dx) > 1) {
+		   		xpos += dx * easing;
+			}
+
+		  	targetY = mouseY;
+		  	float dy = mouseY - ypos;
+
+		  	if(abs(dy) > 1) {
+		    	ypos += dy * easing;	
+		  	}
+		} //good
+
+		class Star{
+ 			var xPos;
+ 			var yPos;
+
+		 	Star (xPosition, yPosition) {
+		 		xPos = xPosition;
+		 		yPos = yPosition;
+	 			}
+
+	 		void drawStar() {
+				image(star, xPos, yPos, 20, 20);
+	 		}	
+
+	 		void teleport(){
+	 			xPos = newStarXPos; 
+	 			yPos = newStarYPos;
+	 			drawStar();
+	 		}	
+		} //good
+
+		class Planet{
+			var size;
+			var r;
+			var g;
+			var b;
+			var d; 
+			//constructor
+			Planet(){
+				d= 50;
+				r = random(20,255);
+				g = random(20,255);
+				b = random(20,255);
+			}
+
+			void drawPlanet(){
+				noStroke();
+				fill(r,g,b);
+				ellipse(xpos, ypos,d,d);
+			}
+
+			void increaseStar(){
+				d=d+1;
+			}
+
+			void slowDownPlanet(){ 
+				if (d > 60 && d<=70){
+					easing = .04;
+				}
+				else if( d> 70 && d<=150){
+					easing = .03;
+				}
+				else if( d> 150 && d<=200){
+					easing = .02;
+				}
+				else if( d> 200 ){
+					easing = .01;
+				}
+			}
+
+			void eatStars(newStar){ 
+				number = d/2; 
+				if(d < maxSize){
+					if (xpos<= newStar.xPos+number && xpos>=newStar.xPos-number){
+					  	if(ypos<= newStar.yPos+ number&& ypos>=newStar.yPos-number) {
+						 	newStar.teleport();
+						 	increaseStar();
+					}
+				}
+			}		
+		} //good
+ 
+		void looseMass(blackhole){ 
+			number = d/2;
+			if (xpos<= blackhole.xPos+number && xpos>=blackhole.xPos-number){
+			  	if(ypos<= blackhole.yPos+number && ypos>=blackhole.yPos-number){
+			  		d= d-10;
+			  		if( d < 3 ){ 
+			  			//document.getElementById("hello").innerHTML="YOU LOSE";
+			  			//image(lose,850,430, 700, 300);
+			  			font = loadFont("lato/Lato-Black.ttf"); 
+						textFont(font,200); 
+						text("YOU LOSE", 450, 500);
+			  			exit();
+			  			
+			  		}
+			  	}
+			}
+		} //good
+
+		void looseD( meteor){
+			number = d/2;
+			if (xpos<= meteor.xPos+number && xpos>=meteor.xPos-number){
+			  	if(ypos<= meteor.yPos+number && ypos>=meteor.yPos-number){
+			  		d= d-10;
+			  		if( d < 3 ){ 
+			  			//document.getElementById("hello").innerHTML="YOU LOSE";
+
+			  			//image(lose,850,430, 700, 300);
+
+			  			font = loadFont("Lato/Lato-Black.ttf"); 
+
+						textFont(font,200); 
+
+						text("YOU LOSE", 450, 500);
+
+			  		
+			  			exit();
+			  			
+			  		}
+			  	}
+			}
+		} //good
+
+		void chased(enemy){
+			enemy.moveEnemy();
+			if (xpos<= enemy.xPos+d && xpos>=enemy.xPos-d){
+			  	if(ypos<= enemy.yPos+d && ypos>=enemy.yPos-d){
+	 				for( var i = 0; i < 5; i++){
+	 					if(enemy.d> d){
+							if(xpos> enemy.xPos){
+								if(enemy.xPos> 0 && enemy.xPos<1920){
+									enemy.xPos = enemy.xPos+1; 
+									increaseEnemy(enemy);
+								if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  						if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  							enemy.moveEnemy();
+			  						}
+			  					}	
+							}
+						}
+							else if(xpos< enemy.xPos){
+								if(enemy.xPos> 0 && enemy.xPos<1920){
+									enemy.xPos = enemy.xPos-1;
+									increaseEnemy(enemy);
+									if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  							if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  							}
+			  						}
+								}	
+							}
+							if(ypos> enemy.yPos){
+								if(enemy.yPos> 0 && enemy.yPos<920){
+									enemy.yPos = enemy.yPos+1; 
+									increaseEnemy(enemy);
+									if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  							if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  								enemy.moveEnemy();
+			  							}
+			  						}
+								}	
+							}					
+							else if(ypos< enemy.yPos){
+								if(enemy.yPos> 0 && enemy.yPos<920){
+									enemy.yPos = enemy.yPos-1;
+									increaseEnemy(enemy);
+									if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  							if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  								enemy.moveEnemy();
+			  							}
+			  						}
+								}
+							}
+						}
+						else if(enemy.d< d){
+							if(xpos> enemy.xPos){
+								if(enemy.xPos> 0 && enemy.xPos<1920){
+									enemy.xPos = enemy.xPos-1; 
+									increaseEnemy(enemy);
+									if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  							if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  							}
+			  						}
+								}
+							}
+							else if(xpos< enemy.xPos){
+								if(enemy.xPos> 0 && enemy.xPos<1920){
+									enemy.xPos = enemy.xPos+1;
+									increaseEnemy(enemy);
+									if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+			  							if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  							}
+			  						}
+								}
+							}	
+
+							if(ypos> enemy.yPos){
+								if(enemy.yPos> 0 && enemy.yPos<920){
+									enemy.yPos = enemy.yPos-1; 
+									increaseEnemy(enemy);
+									if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+		  								if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  							}
+			  						}
+								}
+							}						
+							else if(ypos< enemy.yPos){
+								if(enemy.yPos> 0 && enemy.yPos<920){
+									enemy.yPos = enemy.yPos+1;
+									increaseEnemy(enemy);
+									if (xpos<= enemy.xPos+d/3 && xpos>=enemy.xPos-d/3){
+		  								if(ypos<= enemy.yPos+d/3 && ypos>=enemy.yPos-d/3){
+			  							}
+			  						}
+								}	
+							}
+						}
+					}
+				}	
+	 		}
+		} //good
+			
+		void increaseEnemy(enemy){ 
+			if (d < maxSize){
+				if(xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
+					if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
+						if((enemy.d +5)>=d){
+							//image(lose,850,450, 700, 300);
+							//document.getElementById("hello").innerHTML="YOU LOSE";
+							font = loadFont("lato/Lato-Black.ttf"); 
+							textFont(font,200); 
+							text("YOU LOSE", 450,500);
+				  			exit();
+								
+						}
+					else if(enemy.d<=(d+5)){
+						d = d+(enemy.d/28);				
+						enemy.teleport();
+					}
+				}
+			}
+			}
+			}
+		} //good
+		
+		class Enemy{
+			var xPos; 
+			var yPos; 
+			var speedX;
+			var speedY;
+			var size; 
+			var r; 
+			var g; 
+			var b;
+			var d; 
+
+			Enemy(xPos1,yPos1,speedx1, speedy1,r1,g1,b1) {
+				xPos = xPos1; 
+				yPos = yPos1;
+				r = r1;
+				g = g1;
+				b = b1; 
+				speedX = speedx1;
+				speedY = speedy1;
+				d = 30;
+			}
+			
+			void drawEnemy(){
+				noStroke();
+				fill(r,g,b);
+				ellipse(xPos, yPos,d,d);
+			}
+
+			void looseMass(blackhole){ 
+				number = d/2;
+				if (xPos<= blackhole.xPos+number && xPos>=blackhole.xPos-number){
+				if(yPos<= blackhole.yPos+number && yPos>=blackhole.yPos-number){
+			  		d= d-(d/3);
+				}
+				}
+			}
+
+			void increaseStar(){
+				d=d+1;
+			}
+
+			void slowDownEnemy(){ 
+				if (d > 60 && d<=70){
+					speedX = 4; 	
+				}
+				else if( d> 70 && d<=150){
+					speedX = 3; 
+				}
+				else if( d> 150 && d<=200){
+					speedX = 2; 
+				}
+				else if( d> 200 ){
+					speedX = 1; 
+				}
+			}
+
+			void looseD( meteor){
+			number = d/2;
+			if (xPos<= meteor.xPos+number && xPos>=meteor.xPos-number){
+			  	if(yPos<= meteor.yPos+number && yPos>=meteor.yPos-number){
+			  		d= d-10;
+			  	}
+			}
+		} //good
+
+		void moveEnemy(){ 
+			xPos = xPos + speedX; 
+			yPos = yPos + speedY;
+			if(xPos < 0 || xPos > 1920){
+				speedX = speedX * -1;  
+			}
+			if(yPos < 0 || yPos > 920){
+				speedY = speedY *-1
+			}
+		} //good
+
+		void teleport(){
+	 		xPos = newStarXPos; 
+	 		yPos = newStarYPos;
+	 		r = random(100,255);
+			g = random(100,255);
+			b = random(100,255);
+			d = random(50,300);
+ 			drawEnemy();
+	 	} //good	
+
+	 	void eatStars(newStar){
+	 		number = d/2; 
+	 		if(d < maxSize){
+				if (xPos<= newStar.xPos+number && xPos>=newStar.xPos-number){
+				  	if(yPos<= newStar.yPos+number && yPos>=newStar.yPos-number) {
+					 	newStar.teleport();
+					 	increaseStar();
+						}
+					}	
+				}	
+			}
+		} //good
+
+		class Blackhole{ 
+			var xPos;
+			var yPos;
+
+			Blackhole(xPosition, yPosition){
+				xPos = xPosition;
+				yPos = yPosition;
+			}
+
+			void drawHole(){ 
+				image(blackhole, xPos, yPos, 70, 70);
+			}
+		} //good
+
+		class Meteor{
+			var xPos;
+			var yPos;
+			var xSpeed; 
+			var ySpeed; 
+
+			Meteor(xPosition, yPosition,xSpeed1,ySpeed2){
+				xPos = xPosition;
+				yPos = yPosition;
+				xSpeed = xSpeed1;
+				ySpeed = ySpeed2;
+			}
+
+			void drawMeteor(){
+				image(meteor, xPos, yPos, 70, 70);
+			}
+
+			void shower(){
+				xPos = xPos + xSpeed; 
+				yPos = yPos + ySpeed;
+				if(xPos > 5000){
+					xPos= random(0,300);
+					yPos = random(0,300);	
+				}
+			}
+		} //good
+
+		</script> 
+	</head>
+	<body>
+		<canvas id="mycanvas"></canvas>
+	</body>
+</html>
