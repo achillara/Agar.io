@@ -402,10 +402,11 @@
 	 		}
 		} //good
 			
-		void increaseEnemy(enemy){ 
+		void increaseEnemy(enemy){
+			number = d/2; 
 			if (d < maxSize){
-				if(xpos<= enemy.xPos+20 && xpos>=enemy.xPos-20){
-					if(ypos<= enemy.yPos+20 && ypos>=enemy.yPos-20){
+				if((xpos + number|| xpos - number)<= enemy.xPos+number && (xpos + number || xpos - number)>=enemy.xPos-number){
+					if((ypos + number || ypos - number)<= enemy.yPos+number && (ypos + number || ypos - number)>=enemy.yPos-number){
 						if((enemy.d +5)>=d){
 							//image(lose,850,450, 700, 300);
 							//document.getElementById("hello").innerHTML="YOU LOSE";
