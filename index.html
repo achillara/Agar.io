@@ -236,16 +236,16 @@
 			}
 
 			void slowDownPlanet(){ 
-				if (d > 60 && d<=70){
+				if (d > 60 && d<=100){
 					easing = .04;
 				}
-				else if( d> 70 && d<=150){
+				else if( d> 100 && d<=200){
 					easing = .03;
 				}
-				else if( d> 150 && d<=200){
+				else if( d> 200 && d<=300){
 					easing = .02;
 				}
-				else if( d> 200 ){
+				else if( d> 400 ){
 					easing = .01;
 				}
 			}
@@ -468,16 +468,16 @@
 			}
 
 			void slowDownEnemy(){ 
-				if (d > 60 && d<=70){
+				if (d > 60 && d<=100){
 					speedX = 4; 	
 				}
-				else if( d> 70 && d<=150){
+				else if( d> 100 && d<=200){
 					speedX = 3; 
 				}
-				else if( d> 150 && d<=200){
+				else if( d> 200 && d<=300){
 					speedX = 2; 
 				}
-				else if( d> 200 ){
+				else if( d> 400 ){
 					speedX = 1; 
 				}
 			}
